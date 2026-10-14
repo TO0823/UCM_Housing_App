@@ -1,0 +1,77 @@
+from bs4 import BeautifulSoup
+from scraper.sources.base import BaseScraper
+from scraper.models import Listing
+from scraper.parse import parse_price, parse_beds
+
+
+class ApartmentsScraper(BaseScraper):
+    source = "apartments"
+    url = "https://www.apartments.com/merced-ca/"
+
+    def parse_cards(self, html: str) -> list[Listing]:
+        soup = BeautifulSoup(html, "html.parser")
+        listings = []
+
+        cards = soup.select("article.placard[data-listingid]")
+
+        for card in cards:
+            property_id = card.get("data-listingid")
+
+            link = card.select_one("a.property-link")
+            address = card.select_one(".property-address")
+            image = card.select_one("img.js-placard-photo")
+
+            if not property_id or not link:
+                continue
+
+            url = link.get("href")
+            if not url:
+                continue
+
+            for plan in card.select(".bedRentBox"):
+                price_element = plan.select_one(".priceTextBox")
+                beds_element = plan.select_one(".bedTextBox")
+
+                if not price_element or not beds_element:
+                    continue
+
+                price = parse_price(price_element.get_text(strip=True))
+                beds = parse_beds(beds_element.get_text(strip=True))
+
+                if price is None or beds is None:
+                    continue
+
+                listing = Listing(
+                    price=price,
+                    beds=beds,
+                    baths=None,
+                    address=address.get_text(strip=True) if address else None,
+                    lat=None,
+                    lon=None,
+                    lease_length=None,
+                    posted_at=None,
+                    url=url,
+                    image_url=image.get("src") if image else None,
+                    source=self.source,
+                    source_id=f"{property_id}-{beds}bed"
+                )
+
+                listings.append(listing)
+
+        return listings
+
+    def fetch(self, page) -> list[Listing]:
+        page.wait_for_selector(
+            "article.placard[data-listingid]",
+            timeout=15000
+        )
+
+        html = page.content()
+        from pathlib import Path
+
+        Path("tests/fixtures/apartments_list_page.html").write_text(
+            html,
+            encoding="utf-8"
+        )
+        return self.parse_cards(html)
+        

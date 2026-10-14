@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rent near UC Merced — mockup v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B2A4A; --navy-2:#123A63; --gold:#F2B33D; --gold-ink:#7A4E00;
+    --sky:#EEF2F6; --paper:#FFFFFF; --ink:#16202B; --ink-2:#5B6774; --rule:#DCE3EA;
+    --brick:#B4532A;
+    --display:'Bricolage Grotesque', system-ui, sans-serif;
+    --body:'Instrument Sans', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#D9E0E8;color:var(--ink);font-family:var(--body);padding:32px 16px 48px}
+  .intro{max-width:860px;margin:0 auto 28px}
+  .intro h1{font-family:var(--display);font-size:26px;font-weight:800;margin:0 0 6px;letter-spacing:-.01em}
+  .intro p{margin:0;color:var(--ink-2);font-size:15px;max-width:60ch}
+  .stage{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;align-items:flex-start}
+  .unit{width:372px}
+  .phone{background:var(--sky);border:9px solid #0f1418;border-radius:40px;overflow:hidden;box-shadow:0 30px 50px -20px rgba(11,42,74,.45)}
+  .screen{height:740px;overflow-y:auto;scrollbar-width:none}
+  .screen::-webkit-scrollbar{display:none}
+  .caption{margin-top:14px;font-size:14px;color:var(--ink-2);line-height:1.5}
+  .caption b{color:var(--ink);font-weight:600}
+
+  /* ---------- HOME ---------- */
+  .hero{background:var(--navy);color:#fff;padding:22px 20px 18px;border-radius:0 0 28px 28px}
+  .hero .where{font-size:13px;color:#B8C7D8;display:flex;justify-content:space-between}
+  .hero .where span:last-child{color:var(--gold)}
+  .hero .num{font-family:var(--display);font-size:52px;font-weight:800;letter-spacing:-.03em;line-height:1;margin-top:10px}
+  .hero .num small{font-size:18px;font-weight:500;letter-spacing:0;color:#B8C7D8;margin-left:4px}
+  .hero .def{font-size:13px;color:#B8C7D8;margin-top:4px}
+  .hero svg{display:block;width:100%;height:64px;margin-top:12px}
+  .hero .delta{display:flex;justify-content:space-between;font-size:13px;margin-top:6px;color:#B8C7D8}
+  .hero .delta b{color:#fff;font-weight:600}
+  .hero .delta .up{color:#F0A47E}
+
+  .filters{display:flex;gap:6px;padding:14px 16px 10px;overflow-x:auto;scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .f{white-space:nowrap;font-size:13px;font-weight:500;padding:7px 12px;border-radius:8px;background:var(--paper);border:1px solid var(--rule);color:var(--ink)}
+  .f.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .f.on::after{content:" ✕";opacity:.6}
+
+  .ledger{background:var(--paper);margin:0 12px;border-radius:16px;overflow:hidden}
+  .ledger-h{display:flex;justify-content:space-between;align-items:baseline;padding:14px 16px 8px;font-size:13px;color:var(--ink-2)}
+  .ledger-h b{font-family:var(--display);font-size:16px;color:var(--ink);font-weight:700}
+  .r{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:13px 16px;border-top:1px solid var(--rule);align-items:start}
+  .r .main{font-size:15px;font-weight:600}
+  .r .sub{font-size:13px;color:var(--ink-2);grid-column:1}
+  .r .price{font-family:var(--display);font-size:20px;font-weight:700;text-align:right;letter-spacing:-.02em;grid-row:1/3}
+  .r .price small{display:block;font-family:var(--body);font-size:11px;font-weight:500;color:var(--ink-2);letter-spacing:0}
+  .r.deal{background:#FFF7E3}
+  .r.deal .price small{color:var(--gold-ink);font-weight:600}
+  .src{display:inline-block;font-size:11px;font-weight:600;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:1px}
+  .src.z{background:#E3ECFA;color:#1F4E9C}.src.fb{background:#E3F3FA;color:#0E5D80}.src.ap{background:#E4F5EC;color:#1C6B45}
+
+  .nav{position:sticky;bottom:0;display:flex;background:var(--paper);border-top:1px solid var(--rule);margin-top:14px}
+  .nav div{flex:1;text-align:center;padding:12px 0 14px;font-size:12px;font-weight:500;color:var(--ink-2)}
+  .nav .on{color:var(--navy);font-weight:600;box-shadow:inset 0 3px 0 var(--gold)}
+
+  /* ---------- DETAIL ---------- */
+  .dhead{background:var(--navy);color:#fff;padding:18px 20px 20px;border-radius:0 0 28px 28px}
+  .dhead .back{font-size:13px;color:#B8C7D8}
+  .dhead .num{font-family:var(--display);font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1;margin-top:12px}
+  .dhead .num small{font-size:16px;font-weight:500;letter-spacing:0;color:#B8C7D8;margin-left:4px}
+  .dhead .addr{font-size:14px;margin-top:6px}
+  .dhead .addr span{color:#B8C7D8}
+  .drop{display:inline-block;margin-top:12px;background:var(--gold);color:var(--gold-ink);font-weight:600;font-size:13px;padding:5px 10px;border-radius:8px}
+
+  .hist{background:var(--paper);margin:14px 12px 0;border-radius:16px;padding:16px}
+  .hist h3{font-family:var(--display);font-size:16px;font-weight:700;margin:0}
+  .hist p{font-size:13px;color:var(--ink-2);margin:4px 0 10px}
+  .hist svg{display:block;width:100%;height:110px}
+  .hist .legend{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-2);margin-top:4px}
+
+  .facts{background:var(--paper);margin:12px 12px 0;border-radius:16px;overflow:hidden}
+  .facts .row{display:flex;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--rule);font-size:14px}
+  .facts .row:first-child{border-top:0}
+  .facts .k{color:var(--ink-2)}
+  .facts .v{font-weight:600;text-align:right;max-width:60%}
+
+  .photo{margin:12px 12px 0;height:140px;border-radius:16px;background:
+    linear-gradient(160deg,#C9D4E0,#8FA3B8);display:flex;align-items:flex-end;padding:12px;color:#fff;font-size:12px}
+
+  .cta{display:flex;gap:10px;margin:14px 12px 18px}
+  .btn{flex:1;text-align:center;padding:14px;border-radius:12px;font-size:14px;font-weight:600;background:var(--navy);color:#fff}
+  .btn.alt{background:var(--paper);color:var(--navy);border:1.5px solid var(--navy)}
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>Rent near UC Merced — v2</h1>
+  <p>Same structure as v1 (pulse → filters → listings → detail), redrawn with a real visual identity: campus navy and gold, a price board instead of a stack of cards, and the price-history chart promoted to the top of the detail page.</p>
+</div>
+
+<div class="stage">
+
+  <!-- ================= HOME ================= -->
+  <div class="unit">
+    <div class="phone"><div class="screen">
+
+      <div class="hero">
+        <div class="where"><span>Within 3 mi of campus</span><span>updated 42 min ago</span></div>
+        <div class="num">$1,480<small>/mo</small></div>
+        <div class="def">median asking rent, 137 listings</div>
+        <svg viewBox="0 0 320 64" preserveAspectRatio="none" aria-label="7-day trend">
+          <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F2B33D" stop-opacity=".35"/><stop offset="1" stop-color="#F2B33D" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,40 L46,42 L92,38 L138,39 L184,30 L230,26 L276,22 L320,18 L320,64 L0,64Z" fill="url(#g)"/>
+          <path d="M0,40 L46,42 L92,38 L138,39 L184,30 L230,26 L276,22 L320,18" fill="none" stroke="#F2B33D" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="320" cy="18" r="4" fill="#F2B33D"/>
+        </svg>
+        <div class="delta"><span>7 days ago <b>$1,450</b></span><span class="up">▲ $30 this week</span></div>
+      </div>
+
+      <div class="filters">
+        <div class="f on">Under $1,600</div>
+        <div class="f on">Under 3 mi</div>
+        <div class="f">Beds</div>
+        <div class="f">Baths</div>
+        <div class="f">Lease length</div>
+        <div class="f">Posted</div>
+      </div>
+
+      <div class="ledger">
+        <div class="ledger-h"><b>41 places</b><span>newest first</span></div>
+
+        <div class="r deal">
+          <div class="main">2 bd · 1 ba <span class="src z">Zillow</span></div>
+          <div class="sub">1.2 mi to campus · 12-mo lease · 3 h ago</div>
+          <div class="price">$1,350<small>▼ $50 since Tue</small></div>
+        </div>
+        <div class="r">
+          <div class="main">Room in 3 bd house <span class="src fb">Facebook</span></div>
+          <div class="sub">2.4 mi · Aug–May · yesterday</div>
+          <div class="price">$900<small>shared bath</small></div>
+        </div>
+        <div class="r">
+          <div class="main">2 bd · 2 ba <span class="src ap">Apartments</span></div>
+          <div class="sub">0.8 mi · 12-mo lease · 2 d ago</div>
+          <div class="price">$1,595<small>W/D · AC</small></div>
+        </div>
+        <div class="r">
+          <div class="main">1 bd · 1 ba <span class="src z">Zillow</span></div>
+          <div class="sub">2.9 mi · 6-mo lease · 4 d ago</div>
+          <div class="price">$1,200<small>&nbsp;</small></div>
+        </div>
+        <div class="r deal">
+          <div class="main">3 bd · 2 ba <span class="src ap">Apartments</span></div>
+          <div class="sub">1.6 mi · 12-mo lease · 5 d ago</div>
+          <div class="price">$1,850<small>▼ $100 since Oct 3</small></div>
+        </div>
+        <div class="r">
+          <div class="main">Studio <span class="src z">Zillow</span></div>
+          <div class="sub">1.0 mi · month-to-month · 6 d ago</div>
+          <div class="price">$1,050<small>&nbsp;</small></div>
+        </div>
+      </div>
+
+      <div class="nav"><div class="on">Places</div><div>Trends</div><div>Saved</div></div>
+    </div></div>
+    <div class="caption"><b>Home.</b> The navy block is the live number and its last 7 days. Gold is used for exactly one thing — a price that dropped — so a deal jumps out of the list.</div>
+  </div>
+
+  <!-- ================= DETAIL ================= -->
+  <div class="unit">
+    <div class="phone"><div class="screen">
+
+      <div class="dhead">
+        <div class="back">‹ 41 places</div>
+        <div class="num">$1,350<small>/mo</small></div>
+        <div class="addr">1234 Yosemite Ave <span>· Zillow</span></div>
+        <div class="drop">▼ Dropped $100 since first seen</div>
+      </div>
+
+      <div class="hist">
+        <h3>Asking price, last 30 days</h3>
+        <p>Checked every hour. Listed Sep 17 at $1,400, raised to $1,450, cut to $1,350 on Tue.</p>
+        <svg viewBox="0 0 320 110" preserveAspectRatio="none">
+          <line x1="0" y1="28" x2="320" y2="28" stroke="#DCE3EA" stroke-dasharray="3 4"/>
+          <line x1="0" y1="55" x2="320" y2="55" stroke="#DCE3EA" stroke-dasharray="3 4"/>
+          <line x1="0" y1="82" x2="320" y2="82" stroke="#DCE3EA" stroke-dasharray="3 4"/>
+          <path d="M0,55 L105,55 L105,28 L215,28 L215,82 L320,82" fill="none" stroke="#0B2A4A" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="215" cy="82" r="5" fill="#F2B33D" stroke="#0B2A4A" stroke-width="2"/>
+          <text x="4" y="24" font-size="10" fill="#5B6774" font-family="Instrument Sans">$1,450</text>
+          <text x="4" y="51" font-size="10" fill="#5B6774" font-family="Instrument Sans">$1,400</text>
+          <text x="4" y="78" font-size="10" fill="#5B6774" font-family="Instrument Sans">$1,350</text>
+        </svg>
+        <div class="legend"><span>Sep 17</span><span>Oct 1</span><span>today</span></div>
+      </div>
+
+      <div class="facts">
+        <div class="row"><span class="k">Size</span><span class="v">2 bed · 1 bath</span></div>
+        <div class="row"><span class="k">To campus</span><span class="v">1.2 mi · 6 min drive</span></div>
+        <div class="row"><span class="k">Lease</span><span class="v">12 months, from Aug 1</span></div>
+        <div class="row"><span class="k">Posted</span><span class="v">Oct 8 · 3 h ago</span></div>
+        <div class="row"><span class="k">Included</span><span class="v">Washer/dryer, AC, heat</span></div>
+        <div class="row"><span class="k">Nearby</span><span class="v">Target 0.6 mi · Walmart 2.1 mi · Mercy 1.4 mi</span></div>
+      </div>
+
+      <div class="photo">photo from the listing</div>
+
+      <div class="cta"><div class="btn">Open on Zillow</div><div class="btn alt">Save</div></div>
+    </div></div>
+    <div class="caption"><b>Detail.</b> The chart is first because it's the one thing Zillow won't show you. Facts are a plain key/value list — nothing to decode.</div>
+  </div>
+
+</div>
+</body>
+</html>

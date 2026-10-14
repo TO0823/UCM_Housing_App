@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UCM Housing — home screen mockup</title>
+<style>
+  :root { --bg:#f3f4f6; --card:#fff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb; --accent:#1d4ed8; --up:#dc2626; --down:#16a34a; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: system-ui, -apple-system, Segoe UI, sans-serif; background:#e9ebef; color:var(--ink); padding:24px 16px; }
+  h1 { font-size:18px; margin:0 0 4px; }
+  .sub { color:var(--muted); font-size:14px; margin:0 0 20px; }
+  .row { display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start; justify-content:center; }
+  .phone { width:360px; background:var(--bg); border:10px solid #111; border-radius:36px; overflow:hidden; box-shadow:0 20px 40px rgba(0,0,0,.25); }
+  .screen { height:720px; overflow-y:auto; }
+  .label { text-align:center; font-size:13px; color:var(--muted); margin-top:10px; }
+  .callout { font-size:12px; color:#92400e; background:#fef3c7; border-left:3px solid #f59e0b; padding:6px 10px; margin:8px 12px; border-radius:4px; }
+
+  /* Home */
+  .top { background:var(--card); padding:16px 16px 12px; border-bottom:1px solid var(--line); }
+  .top .title { font-weight:700; font-size:16px; }
+  .top .time { font-size:12px; color:var(--muted); }
+  .pulse { background:var(--card); margin:12px; padding:14px; border-radius:14px; border:1px solid var(--line); }
+  .pulse .big { font-size:34px; font-weight:800; line-height:1; }
+  .pulse .what { font-size:13px; color:var(--muted); margin-top:4px; }
+  .stats { display:flex; gap:10px; margin-top:12px; }
+  .stat { flex:1; background:var(--bg); border-radius:10px; padding:8px 10px; }
+  .stat b { display:block; font-size:16px; }
+  .stat span { font-size:11px; color:var(--muted); }
+  .up { color:var(--up); } .down { color:var(--down); }
+  .chips { display:flex; gap:8px; padding:0 12px 10px; overflow-x:auto; }
+  .chip { white-space:nowrap; font-size:12px; padding:6px 10px; border-radius:999px; background:var(--card); border:1px solid var(--line); }
+  .chip.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .list-h { display:flex; justify-content:space-between; padding:0 14px 6px; font-size:12px; color:var(--muted); }
+  .lst { background:var(--card); margin:0 12px 10px; border-radius:12px; border:1px solid var(--line); padding:12px; }
+  .lst .price { font-weight:800; font-size:18px; }
+  .lst .meta { font-size:13px; color:var(--ink); margin-top:2px; }
+  .lst .foot { display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-top:8px; }
+  .src { font-size:10px; padding:2px 6px; border-radius:4px; background:#eef2ff; color:#3730a3; font-weight:600; }
+  .src.fb { background:#e0f2fe; color:#075985; } .src.apt { background:#ecfdf5; color:#065f46; }
+  .drop { font-size:11px; color:var(--down); font-weight:600; }
+  .tabs { display:flex; background:var(--card); border-top:1px solid var(--line); position:sticky; bottom:0; }
+  .tab { flex:1; text-align:center; font-size:11px; padding:10px 0; color:var(--muted); }
+  .tab.on { color:var(--accent); font-weight:700; }
+
+  /* Detail */
+  .back { font-size:13px; color:var(--accent); padding:14px 16px 6px; }
+  .photo { height:170px; background:linear-gradient(135deg,#cbd5e1,#94a3b8); display:flex; align-items:center; justify-content:center; color:#334155; font-size:13px; }
+  .d { padding:14px 16px; background:var(--card); }
+  .d .price { font-size:26px; font-weight:800; }
+  .d .addr { font-size:14px; color:var(--muted); }
+  .facts { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px 16px; }
+  .fact { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:8px 10px; font-size:13px; }
+  .fact span { display:block; font-size:11px; color:var(--muted); }
+  .hist { background:var(--card); margin:0 12px 12px; padding:12px; border-radius:12px; border:1px solid var(--line); }
+  .hist h4 { margin:0 0 6px; font-size:13px; }
+  .hist p { margin:6px 0 0; font-size:12px; color:var(--muted); }
+  .cta { margin:0 12px 16px; display:flex; gap:8px; }
+  .btn { flex:1; text-align:center; padding:11px; border-radius:10px; font-size:13px; font-weight:600; background:var(--accent); color:#fff; }
+  .btn.ghost { background:var(--card); color:var(--accent); border:1px solid var(--accent); }
+</style>
+</head>
+<body>
+<h1>Option 3 — "Price pulse" + filterable list</h1>
+<p class="sub">Left: what a student sees when they open the app. Right: tapping a listing. Wireframe only — colors/layout are placeholders.</p>
+
+<div class="row">
+
+  <!-- HOME -->
+  <div>
+    <div class="phone"><div class="screen">
+      <div class="top">
+        <div class="title">Housing near UC Merced</div>
+        <div class="time">Updated 42 min ago · scraped hourly</div>
+      </div>
+
+      <div class="callout">① The "pulse" — only you have this, because you scrape every hour.</div>
+      <div class="pulse">
+        <div class="big">$1,480<span style="font-size:14px;color:var(--muted);font-weight:500">/mo</span></div>
+        <div class="what">Median rent within 3 mi of campus</div>
+        <div class="stats">
+          <div class="stat"><b class="up">▲ 2.1%</b><span>vs last week</span></div>
+          <div class="stat"><b>137</b><span>active listings</span></div>
+          <div class="stat"><b>9</b><span>new today</span></div>
+        </div>
+      </div>
+
+      <div class="callout">② Filters = your "important factors".</div>
+      <div class="chips">
+        <div class="chip on">Under $1,600</div>
+        <div class="chip">2+ beds</div>
+        <div class="chip">1+ bath</div>
+        <div class="chip on">&lt; 3 mi</div>
+        <div class="chip">12-mo lease</div>
+        <div class="chip">Posted this week</div>
+      </div>
+
+      <div class="callout">③ One card per listing, all 3 sources merged.</div>
+      <div class="list-h"><span>41 listings</span><span>Sort: Newest ▾</span></div>
+
+      <div class="lst">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="price">$1,350</div><span class="src">Zillow</span>
+        </div>
+        <div class="meta">2 bd · 1 ba · 1.2 mi to campus</div>
+        <div class="foot"><span>Posted 3 hrs ago · 12-mo lease</span><span class="drop">▼ $50 since Tue</span></div>
+      </div>
+      <div class="lst">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="price">$900</div><span class="src fb">FB Marketplace</span>
+        </div>
+        <div class="meta">1 bd (room) · shared ba · 2.4 mi to campus</div>
+        <div class="foot"><span>Posted yesterday · Aug–May</span><span></span></div>
+      </div>
+      <div class="lst">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="price">$1,595</div><span class="src apt">Apartments.com</span>
+        </div>
+        <div class="meta">2 bd · 2 ba · 0.8 mi to campus</div>
+        <div class="foot"><span>Posted 2 days ago · 12-mo lease</span><span>W/D · AC</span></div>
+      </div>
+      <div class="lst">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="price">$1,200</div><span class="src">Zillow</span>
+        </div>
+        <div class="meta">1 bd · 1 ba · 2.9 mi to campus</div>
+        <div class="foot"><span>Posted 4 days ago · 6-mo lease</span><span></span></div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab on">Listings</div>
+        <div class="tab">Trends</div>
+        <div class="tab">Saved</div>
+      </div>
+    </div></div>
+    <div class="label">Home — first screen on open</div>
+  </div>
+
+  <!-- DETAIL -->
+  <div>
+    <div class="phone"><div class="screen">
+      <div class="back">‹ Back to listings</div>
+      <div class="photo">listing photo (from source)</div>
+      <div class="d">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="price">$1,350<span style="font-size:14px;color:var(--muted);font-weight:500">/mo</span></div>
+          <span class="src">Zillow</span>
+        </div>
+        <div class="addr">1234 Yosemite Ave, Merced CA</div>
+      </div>
+
+      <div class="facts">
+        <div class="fact">2 bd / 1 ba<span>Size</span></div>
+        <div class="fact">1.2 mi · 6 min drive<span>To campus</span></div>
+        <div class="fact">12-month<span>Lease</span></div>
+        <div class="fact">Oct 8, 2026<span>Posted</span></div>
+        <div class="fact">W/D, AC, heat<span>Utilities</span></div>
+        <div class="fact">0.6 mi Target · 2.1 mi Walmart<span>Nearby</span></div>
+      </div>
+
+      <div class="callout">④ Price history — exists only because you scrape hourly.</div>
+      <div class="hist">
+        <h4>Price history (30 days)</h4>
+        <svg viewBox="0 0 300 80" width="100%" height="80">
+          <polyline fill="none" stroke="#1d4ed8" stroke-width="2"
+            points="0,30 40,30 80,30 100,20 140,20 180,20 200,45 240,45 280,45 300,45"/>
+          <text x="2" y="26" font-size="9" fill="#6b7280">$1,400</text>
+          <text x="100" y="16" font-size="9" fill="#6b7280">$1,450</text>
+          <text x="202" y="58" font-size="9" fill="#16a34a">$1,350</text>
+        </svg>
+        <p>Listed at $1,400 → raised to $1,450 → dropped to $1,350 on Tue. First seen 23 days ago.</p>
+      </div>
+
+      <div class="cta">
+        <div class="btn">Open on Zillow</div>
+        <div class="btn ghost">♡ Save</div>
+      </div>
+    </div></div>
+    <div class="label">Detail — after tapping a listing</div>
+  </div>
+
+</div>
+</body>
+</html>

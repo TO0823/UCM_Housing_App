@@ -1,0 +1,5 @@
+# add packages here, one per line (playwright, pytest, ...)
+pytest
+playwright
+python-dotenv
+beautifulsoup4
