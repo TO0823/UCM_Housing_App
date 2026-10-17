@@ -3,3 +3,4 @@ pytest
 playwright
 python-dotenv
 beautifulsoup4
+requests

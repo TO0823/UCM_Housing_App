@@ -6,4 +6,5 @@ __pycache__/
 .superpowers/
 venv/
 scratch/
-tests\fixtures
+tests/fixtures/
+.pytest_cache/
