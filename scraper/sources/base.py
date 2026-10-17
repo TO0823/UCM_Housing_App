@@ -19,9 +19,17 @@ class BaseScraper:
             browser_path = os.getenv("BROWSER_PATH")
             print("Selected browser:", browser_path or "Default Chromium")
 
+            # NOTE (2026-10-17): headless mode is controlled by HEADLESS in .env instead of
+            # being hard-coded. The default is a VISIBLE window because Apartments.com's bot
+            # protection (Akamai) returns "Access Denied" to a headless browser; tested with
+            # a real user agent and the automation flag disabled, still blocked. Visible mode
+            # works (59 listings). Set HEADLESS=true to try headless again later. For the
+            # scheduled job this means Task Scheduler must run it "only when user is logged on".
+            headless = os.getenv("HEADLESS", "false").strip().lower() in ("true", "1", "yes")
+
             browser = playwright.chromium.launch(
                 executable_path=browser_path or None,
-                headless=False
+                headless=headless
             )
 
             try:

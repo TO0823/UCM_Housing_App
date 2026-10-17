@@ -67,11 +67,9 @@ class ApartmentsScraper(BaseScraper):
         )
 
         html = page.content()
-        from pathlib import Path
 
-        Path("tests/fixtures/apartments_list_page.html").write_text(
-            html,
-            encoding="utf-8"
-        )
+        # NOTE: this used to also save `html` to tests/fixtures/apartments_list_page.html
+        # on every scrape. Removed 2026-10-17: it overwrote the test fixture every run and
+        # crashed when the folder was missing. To capture a fresh fixture on purpose, run:
+        #     python scratch/save_fixture.py
         return self.parse_cards(html)
-        
