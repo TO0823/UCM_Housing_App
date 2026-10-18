@@ -6,5 +6,5 @@ __pycache__/
 .superpowers/
 venv/
 scratch/
-tests/fixtures/
+tests/fixtures/apartments_list_page.html
 .pytest_cache/
